@@ -377,20 +377,17 @@
             const encoded = Array.from(encodedStr, c => c.charCodeAt(0));
             const seedStr = document.getElementById('seed-input').value;
             const seed = Array.from(seedStr, c => c.charCodeAt(0));
+            const compression = document.getElementById('compression-select').value;
             
-            const result = await callAPI('decode', { encoded, seed });
+            const result = await callAPI('decode', { encoded, seed, compression });
             document.getElementById('output').textContent = JSON.stringify(result, null, 2);
         });
 
         document.getElementById('verify-btn').addEventListener('click', async function() {
-            const dataStr = document.getElementById('data-input').value;
-            const data = dataStr.split(',').map(Number);
-            const seedStr = document.getElementById('seed-input').value;
-            const seed = Array.from(seedStr, c => c.charCodeAt(0));
-            const encodedStr = document.getElementById('data-input').value; // Assuming same field for simplicity
+            const encodedStr = document.getElementById('data-input').value;
             const encoded = Array.from(encodedStr, c => c.charCodeAt(0));
             
-            const result = await callAPI('verify', { data, seed, encoded });
+            const result = await callAPI('verify', { encoded });
             document.getElementById('output').textContent = JSON.stringify(result, null, 2);
         });
 
