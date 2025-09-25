@@ -1,10 +1,11 @@
 use axum::{
     extract::Json,
-    http::StatusCode,
+    http::{header::HeaderName, HeaderMap, Method, StatusCode},
     routing::post,
     Router,
 };
 use serde::{Deserialize, Serialize};
+use tower_http::cors::{Any, CorsLayer};
 use crate::{encode, decode, partial_verify, CompressionAlgorithm};
 
 #[derive(Deserialize)]
@@ -73,8 +74,14 @@ async fn verify_handler(Json(payload): Json<VerifyRequest>) -> Json<VerifyRespon
 }
 
 pub fn create_router() -> Router {
+    let cors = CorsLayer::new()
+        .allow_origin(Any)  // Permettre toutes les origines pour le développement, ou spécifier "https://gxcore.io"
+        .allow_methods([Method::GET, Method::POST])
+        .allow_headers(Any);
+
     Router::new()
         .route("/encode", post(encode_handler))
         .route("/decode", post(decode_handler))
         .route("/verify", post(verify_handler))
+        .layer(cors)
 }
