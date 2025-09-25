@@ -356,6 +356,9 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 });
+                if (!response.ok) {
+                    return { error: `HTTP ${response.status}: ${response.statusText}` };
+                }
                 const result = await response.json();
                 return result;
             } catch (error) {
@@ -371,7 +374,12 @@
             const compression = document.getElementById('compression-select').value;
             
             const result = await callAPI('encode', { data, seed, compression });
-            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+            if (result.error) {
+                document.getElementById('output').textContent = `Error: ${result.error}`;
+            } else {
+                const encodedStr = String.fromCharCode(...result.encoded);
+                document.getElementById('output').textContent = `Encoded: ${encodedStr}`;
+            }
         });
 
         document.getElementById('decode-btn').addEventListener('click', async function() {
@@ -382,7 +390,12 @@
             const compression = document.getElementById('compression-select').value;
             
             const result = await callAPI('decode', { encoded, seed, compression });
-            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+            if (result.error) {
+                document.getElementById('output').textContent = `Error: ${result.error}`;
+            } else {
+                const decodedStr = String.fromCharCode(...result.decoded);
+                document.getElementById('output').textContent = `Decoded: ${decodedStr}`;
+            }
         });
 
         document.getElementById('verify-btn').addEventListener('click', async function() {
@@ -390,7 +403,7 @@
             const encoded = Array.from(encodedStr, c => c.charCodeAt(0));
             
             const result = await callAPI('verify', { encoded });
-            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+            document.getElementById('output').textContent = `Valid: ${result.valid}`;
         });
 
         document.getElementById('benchmark-btn').addEventListener('click', async function() {
