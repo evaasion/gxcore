@@ -356,11 +356,16 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 });
+                const text = await response.text();
                 if (!response.ok) {
-                    return { error: `HTTP ${response.status}: ${response.statusText}` };
+                    return { error: `HTTP ${response.status}: ${response.statusText} - ${text}` };
                 }
-                const result = await response.json();
-                return result;
+                try {
+                    const result = JSON.parse(text);
+                    return result;
+                } catch {
+                    return { error: `Invalid JSON response: ${text}` };
+                }
             } catch (error) {
                 return { error: error.message };
             }
