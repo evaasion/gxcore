@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CypherSolBase Documentation - API reference, usage examples, and integration guide for Solana developers">
+    <title>CypherSolBase Documentation - Gxcore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberblue: '#00f0ff',
+                        cybergreen: '#00ff9d',
+                        dark: '#0a0a0a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; background-color: #0a0a0a; color: white; }
+        .neon-border { border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
+        code { background: #1a1a1a; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #1a1a1a; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-sm border-b border-cyberblue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="shield" class="text-cybergreen w-8 h-8"></i>
+                        <span class="ml-2 text-cybergreen font-bold text-xl">Gxcore</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-cyberblue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="index.html#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="index.html#features" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="index.html#demo" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Demo</a>
+                        <a href="docs.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-24 pb-12 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">CypherSolBase Documentation</h1>
+            <p class="text-gray-300 text-lg">Complete guide to integrating CypherSolBase in your Solana projects</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-12 bg-gradient-to-b from-dark to-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-12">
+                <!-- Installation -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">Installation</h2>
+                    <p class="text-gray-300 mb-4">Add CypherSolBase to your Cargo.toml:</p>
+                    <pre><code>[dependencies]
+cyphersolbase = "0.1.0"</code></pre>
+                    <p class="text-gray-300 mt-4">Or install from GitHub:</p>
+                    <pre><code>cargo add --git https://github.com/evaasion/gxcore.git cyphersolbase</code></pre>
+                </div>
+
+                <!-- Basic Usage -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">Basic Usage</h2>
+                    <h3 class="text-xl font-bold text-white mb-2">Encoding Data</h3>
+                    <pre><code>use cyphersolbase::{encode, CompressionAlgorithm};
+
+let data = b"Hello, Solana!".to_vec();
+let seed = b"my_secret_seed".to_vec();
+let encoded = encode(&data, &seed, CompressionAlgorithm::Lz4)?;</code></pre>
+
+                    <h3 class="text-xl font-bold text-white mb-2 mt-6">Decoding Data</h3>
+                    <pre><code>use cyphersolbase::decode;
+
+let decoded = decode(&encoded, &seed)?;</code></pre>
+
+                    <h3 class="text-xl font-bold text-white mb-2 mt-6">Verifying Integrity</h3>
+                    <pre><code>use cyphersolbase::partial_verify;
+
+let is_valid = partial_verify(&encoded)?;</code></pre>
+                </div>
+
+                <!-- API Reference -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">API Reference</h2>
+                    <h3 class="text-xl font-bold text-white mb-2">Functions</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><code>encode(data: &[u8], seed: &[u8], compression: CompressionAlgorithm) -> Result<Vec<u8>></code> - Encode data with dynamic alphabet</li>
+                        <li><code>decode(encoded: &[u8], seed: &[u8]) -> Result<Vec<u8>></code> - Decode data</li>
+                        <li><code>partial_verify(encoded: &[u8]) -> Result<bool></code> - Verify CRC-32 without decoding</li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold text-white mb-2 mt-6">Enums</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><code>CompressionAlgorithm { None, Lz4, Brotli }</code> - Compression options</li>
+                    </ul>
+                </div>
+
+                <!-- Web API -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">Web API</h2>
+                    <p class="text-gray-300 mb-4">CypherSolBase provides a REST API for testing and integration:</p>
+                    <h3 class="text-xl font-bold text-white mb-2">Endpoints</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><code>POST /encode</code> - Encode data. Body: <code>{ "data": [u8], "seed": [u8], "compression": "none|lz4|brotli" }</code></li>
+                        <li><code>POST /decode</code> - Decode data. Body: <code>{ "encoded": [u8], "seed": [u8] }</code></li>
+                        <li><code>POST /verify</code> - Verify data. Body: <code>{ "data": [u8], "seed": [u8], "encoded": [u8] }</code></li>
+                    </ul>
+                    <p class="text-gray-300 mt-4">Live API: <a href="https://gxcore.onrender.com" class="text-cyberblue underline">https://gxcore.onrender.com</a></p>
+                </div>
+
+                <!-- Examples -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">Examples</h2>
+                    <h3 class="text-xl font-bold text-white mb-2">Solana Program Integration</h3>
+                    <pre><code>use cyphersolbase::{encode, CompressionAlgorithm};
+use solana_program::msg;
+
+// In your Solana program
+let payload = encode(&user_data, &program_seed, CompressionAlgorithm::Lz4)?;
+msg!("Encoded payload: {:?}", payload);</code></pre>
+
+                    <h3 class="text-xl font-bold text-white mb-2 mt-6">DeFi Transaction Security</h3>
+                    <pre><code>// Secure sensitive transaction data
+let secure_data = encode(&transaction_details, &user_seed, CompressionAlgorithm::None)?;
+let verified = partial_verify(&secure_data)?;</code></pre>
+                </div>
+
+                <!-- Links -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border text-center">
+                    <h2 class="text-2xl font-bold text-cybergreen mb-4">More Resources</h2>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://github.com/evaasion/gxcore" class="text-cyberblue hover:text-white">GitHub</a>
+                        <a href="WHITEPAPER.md" class="text-cyberblue hover:text-white">Whitepaper</a>
+                        <a href="ROADMAP.md" class="text-cyberblue hover:text-white">Roadmap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-cyberblue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <i data-feather="shield" class="text-cybergreen w-6 h-6"></i>
+                <span class="ml-2 text-cybergreen font-bold">Gxcore</span>
+            </div>
+            <p class="text-gray-400">© 2025 Gxcore Strategies. Built for Colosseum Hackathon.</p>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
