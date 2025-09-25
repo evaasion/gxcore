@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gxcore Strategies presents CypherSolBase - Secure encoding for Solana with dynamic alphabets, error detection, and zero-knowledge proofs">
+    <title>Gxcore Strategies - CypherSolBase for Solana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyberblue: '#00f0ff',
+                        cybergreen: '#00ff9d',
+                        dark: '#0a0a0a',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { 'box-shadow': '0 0 5px #00f0ff' },
+                            '100%': { 'box-shadow': '0 0 20px #00ff9d' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #0a0a0a;
+            color: white;
+        }
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .neon-border {
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 157, 0.3);
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-sm border-b border-cyberblue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="shield" class="text-cybergreen w-8 h-8"></i>
+                        <span class="ml-2 text-cybergreen font-bold text-xl">Gxcore</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-cyberblue hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#features" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#demo" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Demo</a>
+                        <a href="#team" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                        <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i data-feather="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-dark/95 pt-16">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#home" class="text-cyberblue block px-3 py-2 rounded-md text-base font-medium">Home</a>
+            <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+            <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
+            <a href="#demo" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Demo</a>
+            <a href="#team" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
+            <a href="#contact" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="grid-pattern min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/90 to-dark"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen">
+                Gxcore
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-bold mb-8 text-white">CypherSolBase – Secure Encoding for Solana</h2>
+            <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                Win the Colosseum Hackathon with innovative crypto tools. Encode, decode, and verify data with cryptographic strength.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#demo" class="px-8 py-3 bg-gradient-to-r from-cyberblue to-cybergreen text-dark font-bold rounded-md hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+                    Explore Demo
+                </a>
+            </div>
+            <p class="mt-8 text-sm text-cyberblue">Built for the future of decentralized security.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">What is CypherSolBase?</h2>
+                <div class="w-24 h-1 bg-cyberblue mx-auto"></div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-12 fade-in">
+                <div class="md:w-1/2">
+                    <p class="text-gray-300 mb-6">
+                        CypherSolBase is a Rust library for Solana that enhances Base64 encoding with dynamic alphabets, error detection (CRC-32), compression (LZ4/Brotli), privacy layers, and zero-knowledge proofs. Secure your on-chain data efficiently.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i data-feather="check-circle" class="text-cybergreen mr-3 mt-1"></i>
+                            <span class="text-gray-300"><span class="font-bold text-white">Security:</span> SHA-256 derived dynamic alphabets prevent pattern recognition</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check-circle" class="text-cybergreen mr-3 mt-1"></i>
+                            <span class="text-gray-300"><span class="font-bold text-white">Speed:</span> Optimized Rust implementation for Solana's runtime</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check-circle" class="text-cybergreen mr-3 mt-1"></i>
+                            <span class="text-gray-300"><span class="font-bold text-white">Privacy:</span> XOR layer with seed-based masking for sensitive data</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check-circle" class="text-cybergreen mr-3 mt-1"></i>
+                            <span class="text-gray-300"><span class="font-bold text-white">ZK Verification:</span> Halo2 integration for zero-knowledge proof validation</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 bg-gradient-to-br from-cyberblue/20 to-cybergreen/20 rounded-lg flex items-center justify-center neon-border">
+                            <i data-feather="code" class="w-32 h-32 text-cyberblue animate-pulse"></i>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-cybergreen/20 to-cyberblue/20 rounded-lg neon-border flex items-center justify-center">
+                            <i data-feather="lock" class="w-16 h-16 text-cybergreen"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-b from-dark to-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">Core Features</h2>
+                <div class="w-24 h-1 bg-cyberblue mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border transition-all duration-300 card-hover fade-in">
+                    <div class="w-12 h-12 bg-cyberblue/10 rounded-full flex items-center justify-center mb-4">
+                        <i data-feather="key" class="text-cyberblue w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Dynamic Encoding</h3>
+                    <p class="text-gray-300">SHA-256 derived alphabets prevent pattern recognition and enhance security through unique encoding tables per seed.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border transition-all duration-300 card-hover fade-in">
+                    <div class="w-12 h-12 bg-cybergreen/10 rounded-full flex items-center justify-center mb-4">
+                        <i data-feather="shield" class="text-cybergreen w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Error Detection</h3>
+                    <p class="text-gray-300">Integrated CRC-32 checksums validate data integrity, ensuring encoded payloads haven't been tampered with.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border transition-all duration-300 card-hover fade-in">
+                    <div class="w-12 h-12 bg-cyberblue/10 rounded-full flex items-center justify-center mb-4">
+                        <i data-feather="package" class="text-cyberblue w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Compression & Privacy</h3>
+                    <p class="text-gray-300">LZ4/Brotli compression with XOR privacy layers reduces size while obscuring sensitive data patterns.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="bg-dark/50 p-6 rounded-lg neon-border transition-all duration-300 card-hover fade-in">
+                    <div class="w-12 h-12 bg-cybergreen/10 rounded-full flex items-center justify-center mb-4">
+                        <i data-feather="zap" class="text-cybergreen w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">ZK Proofs</h3>
+                    <p class="text-gray-300">Halo2 integration enables zero-knowledge proof validation without revealing underlying data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">Try CypherSolBase Live</h2>
+                <div class="w-24 h-1 bg-cyberblue mx-auto"></div>
+                <p class="mt-4 text-gray-300 max-w-2xl mx-auto">Test our encoding system with your own data. Demo connects to local API – run <code class="bg-gray-800 px-2 py-1 rounded">cargo run</code> to test.</p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-black/30 p-6 rounded-lg neon-border fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="data-input" class="block text-sm font-medium text-gray-300 mb-1">Data</label>
+                        <textarea id="data-input" rows="5" class="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyberblue" placeholder="Enter bytes (e.g., 72,101,108,108,111)">72,101,108,108,111</textarea>
+                    </div>
+                    <div>
+                        <label for="seed-input" class="block text-sm font-medium text-gray-300 mb-1">Seed</label>
+                        <input type="text" id="seed-input" class="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyberblue" placeholder="secret" value="secret">
+                        
+                        <label for="compression-select" class="block text-sm font-medium text-gray-300 mt-4 mb-1">Compression</label>
+                        <select id="compression-select" class="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyberblue">
+                            <option value="none">None</option>
+                            <option value="lz4">LZ4</option>
+                            <option value="brotli">Brotli</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                    <button id="encode-btn" class="px-4 py-2 bg-cyberblue text-dark font-bold rounded-md hover:bg-cyberblue/90 transition">Encode</button>
+                    <button id="decode-btn" class="px-4 py-2 bg-cybergreen text-dark font-bold rounded-md hover:bg-cybergreen/90 transition">Decode</button>
+                    <button id="verify-btn" class="px-4 py-2 bg-gray-700 text-white font-bold rounded-md hover:bg-gray-600 transition">Verify</button>
+                </div>
+                <div class="mt-6">
+                    <label for="output" class="block text-sm font-medium text-gray-300 mb-1">Output</label>
+                    <div id="output" class="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 min-h-20 text-gray-300 font-mono overflow-auto max-h-60">
+                        Results will appear here...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-gradient-to-b from-black to-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">Meet the Gxcore Team</h2>
+                <div class="w-24 h-1 bg-cyberblue mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="bg-dark/50 p-8 rounded-lg neon-border transition-all duration-300 card-hover fade-in">
+                    <div class="flex flex-col items-center">
+                        <img src="g-c-uzei_400x400.jpg" alt="Team Member" class="w-32 h-32 rounded-full object-cover mb-4 border-2 border-cyberblue">
+                        <h3 class="text-xl font-bold text-white">SpermG0rk (Dw50HcQqAqm28En5p+=)</h3>
+                        <p class="text-cybergreen mb-2">Lead Crypto Engineer</p>
+                        <p class="text-gray-300 text-center mb-4">Passionate about secure blockchain solutions and cryptographic innovations for decentralized systems.</p>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/evaasion" class="text-gray-400 hover:text-cyberblue transition">
+                                <i data-feather="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-cyberblue transition">
+                                <i data-feather="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://x.com/spermgOrk" class="text-gray-400 hover:text-cyberblue transition">
+                                <i data-feather="twitter" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-cyberblue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <i data-feather="shield" class="text-cybergreen w-6 h-6"></i>
+                        <span class="ml-2 text-cybergreen font-bold">Gxcore</span>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-sm">© 2025 Gxcore Strategies. Built for Colosseum Hackathon.</p>
+                </div>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="#" class="text-gray-400 hover:text-cyberblue transition">GitHub</a>
+                    <a href="#" class="text-gray-400 hover:text-cyberblue transition">Whitepaper</a>
+                    <a href="#" class="text-gray-400 hover:text-cyberblue transition">Hackathon Submission</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Demo functionality
+        async function callAPI(endpoint, body) {
+            try {
+                const response = await fetch(`http://127.0.0.1:3000/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+
+        document.getElementById('encode-btn').addEventListener('click', async function() {
+            const dataStr = document.getElementById('data-input').value;
+            const data = dataStr.split(',').map(Number);
+            const seedStr = document.getElementById('seed-input').value;
+            const seed = Array.from(seedStr, c => c.charCodeAt(0));
+            const compression = document.getElementById('compression-select').value;
+            
+            const result = await callAPI('encode', { data, seed, compression });
+            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        });
+
+        document.getElementById('decode-btn').addEventListener('click', async function() {
+            const encodedStr = document.getElementById('data-input').value;
+            const encoded = Array.from(encodedStr, c => c.charCodeAt(0));
+            const seedStr = document.getElementById('seed-input').value;
+            const seed = Array.from(seedStr, c => c.charCodeAt(0));
+            
+            const result = await callAPI('decode', { encoded, seed });
+            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        });
+
+        document.getElementById('verify-btn').addEventListener('click', async function() {
+            const dataStr = document.getElementById('data-input').value;
+            const data = dataStr.split(',').map(Number);
+            const seedStr = document.getElementById('seed-input').value;
+            const seed = Array.from(seedStr, c => c.charCodeAt(0));
+            const encodedStr = document.getElementById('data-input').value; // Assuming same field for simplicity
+            const encoded = Array.from(encodedStr, c => c.charCodeAt(0));
+            
+            const result = await callAPI('verify', { data, seed, encoded });
+            document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize feather icons
+        feather.replace();
+    </script>
+</body>
+</html>
