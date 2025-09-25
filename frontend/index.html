@@ -398,6 +398,9 @@
 
             try {
                 const response = await fetch(`https://gxcore.onrender.com/benchmark`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
                 const result = await response.json();
 
                 if (result.results) {
