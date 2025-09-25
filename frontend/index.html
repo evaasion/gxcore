@@ -277,6 +277,7 @@
                     <button id="encode-btn" class="px-4 py-2 bg-cyberblue text-dark font-bold rounded-md hover:bg-cyberblue/90 transition">Encode</button>
                     <button id="decode-btn" class="px-4 py-2 bg-cybergreen text-dark font-bold rounded-md hover:bg-cybergreen/90 transition">Decode</button>
                     <button id="verify-btn" class="px-4 py-2 bg-gray-700 text-white font-bold rounded-md hover:bg-gray-600 transition">Verify</button>
+                    <button id="benchmark-btn" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-md hover:bg-purple-700 transition">Run Benchmarks</button>
                 </div>
                 <div class="mt-6">
                     <label for="output" class="block text-sm font-medium text-gray-300 mb-1">Output</label>
@@ -389,6 +390,49 @@
             
             const result = await callAPI('verify', { encoded });
             document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+        });
+
+        document.getElementById('benchmark-btn').addEventListener('click', async function() {
+            // Show loading state
+            document.getElementById('output').textContent = "Running benchmarks... This may take a few seconds ⏳";
+
+            try {
+                const response = await fetch(`https://gxcore.onrender.com/benchmark`);
+                const result = await response.json();
+
+                if (result.results) {
+                    // Format benchmark results nicely
+                    let output = `🏁 Benchmarks completed in ${result.total_time_ms.toFixed(2)}ms\n\n`;
+
+                    // Group results by operation type
+                    const encodeResults = result.results.filter(r => r.operation.startsWith('encode_'));
+                    const decodeResults = result.results.filter(r => r.operation.startsWith('decode_'));
+
+                    output += "📊 ENCODING PERFORMANCE:\n";
+                    output += "─".repeat(60) + "\n";
+                    encodeResults.forEach(r => {
+                        output += `${r.operation.replace('encode_', '').toUpperCase()} (${r.compression}) | `;
+                        output += `${r.data_size} bytes | `;
+                        output += `${r.avg_time_per_op_ns.toFixed(0)} ns/op | `;
+                        output += `${r.throughput_mb_per_sec.toFixed(2)} MB/s\n`;
+                    });
+
+                    output += "\n📈 DECODING PERFORMANCE:\n";
+                    output += "─".repeat(60) + "\n";
+                    decodeResults.forEach(r => {
+                        output += `${r.operation.replace('decode_', '').toUpperCase()} (${r.compression}) | `;
+                        output += `${r.data_size} bytes | `;
+                        output += `${r.avg_time_per_op_ns.toFixed(0)} ns/op | `;
+                        output += `${r.throughput_mb_per_sec.toFixed(2)} MB/s\n`;
+                    });
+
+                    document.getElementById('output').textContent = output;
+                } else {
+                    document.getElementById('output').textContent = "❌ Benchmark failed: " + JSON.stringify(result, null, 2);
+                }
+            } catch (error) {
+                document.getElementById('output').textContent = "❌ Benchmark error: " + error.message;
+            }
         });
 
         // Intersection Observer for fade-in animations
