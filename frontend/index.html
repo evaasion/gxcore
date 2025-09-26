@@ -6,18 +6,21 @@
     <meta name="description" content="Gxcore Strategies presents CypherSolBase - Secure encoding for Solana with dynamic alphabets, error detection, and zero-knowledge proofs">
     <title>Gxcore Strategies - CypherSolBase for Solana</title>
 
-    <!-- Preconnect to external domains for faster loading -->
+    <!-- Performance optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preconnect" href="https://gxcore.onrender.com">
-
-    <!-- DNS prefetch for API calls -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="//gxcore.onrender.com">
-    <!-- Optimized Tailwind CDN with only used utilities -->
+
+    <!-- Optimized Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <!-- Single Feather Icons script -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+    <!-- Optimized Tailwind config -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,41 +29,60 @@
                         cyberblue: '#00f0ff',
                         cybergreen: '#00ff9d',
                         dark: '#0a0a0a',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { 'box-shadow': '0 0 5px #00f0ff' },
+                            '100%': { 'box-shadow': '0 0 20px #00ff9d' },
+                        }
                     }
                 }
             }
         }
     </script>
+
+    <!-- Optimized CSS -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
         body {
             font-family: 'JetBrains Mono', monospace;
             background-color: #0a0a0a;
             color: white;
         }
+
         .grid-pattern {
             background-image:
                 linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
         }
+
         .neon-border {
             border: 1px solid rgba(0, 240, 255, 0.3);
             box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
         }
+
         .card-hover:hover {
             transform: translateY(-2px);
             transition: transform 0.2s ease;
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         /* Optimize font loading */
         @font-face {
             font-family: 'JetBrains Mono';
@@ -113,28 +135,303 @@
             <a href="#contact" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
         </div>
     </div>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-dark">
+        <!-- Matrix Background -->
+        <div id="matrix-bg" class="absolute inset-0 overflow-hidden opacity-20"></div>
+        
+        <!-- Floating Particles -->
+        <div id="particles" class="absolute inset-0"></div>
+        
+        <!-- Geometric Shapes -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
 
-    <!-- Hero Section - Optimized -->
-    <section id="home" class="grid-pattern min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-dark/95 to-dark/80"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center fade-in">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen">
-                Gxcore
-            </h1>
-            <h2 class="text-2xl md:text-4xl font-bold mb-8 text-white leading-tight">CypherSolBase – Secure Encoding for Solana</h2>
-            <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Win the Colosseum Hackathon with innovative crypto tools. Encode, decode, and verify data with cryptographic strength.
-            </p>
-            <div class="flex justify-center">
-                <a href="#demo" class="px-8 py-3 bg-gradient-to-r from-cyberblue to-cybergreen text-dark font-bold rounded-md hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Integrate CypherSolBase into your Solana dApps
-                </a>
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="cyber-card bg-black/50 backdrop-blur-sm border border-cyberblue/30 rounded-xl p-8 md:p-12 shadow-2xl transform-style-preserve-3d">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen animate-text-glow">
+                    Gxcore
+                </h1>
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 text-white">
+                    <span class="typing-text" data-text="CypherSolBase – Secure Encoding for Solana"></span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto typing-subtitle" data-text="Win the Colosseum Hackathon with innovative crypto tools. Encode, decode, and verify data with cryptographic strength.">
+                </p>
+                <div class="flex justify-center">
+                    <a href="#demo" class="cyber-button px-8 py-4 bg-gradient-to-r from-cyberblue to-cybergreen text-dark font-bold rounded-md hover:opacity-90 transition-all duration-300 transform hover:scale-105 group">
+                        <span class="relative z-10">Integrate CypherSolBase into your Solana dApps</span>
+                        <span class="absolute inset-0 bg-gradient-to-r from-cyberblue/50 to-cybergreen/50 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    </a>
+                </div>
+                <div class="mt-10">
+                    <div class="code-snippet inline-block bg-black/70 border border-cyberblue/30 rounded-md p-4 text-left max-w-full overflow-x-auto">
+                        <pre class="text-xs md:text-sm text-cyberblue font-mono animate-code-pulse">[72, 101, 108, 108, 111] → "8F9gH0iJ1kL2mN3"</pre>
+                    </div>
+                </div>
             </div>
-            <p class="mt-8 text-sm text-cyberblue/80">Built for the future of decentralized security.</p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="scroll-down animate-bounce">
+                <i data-feather="chevron-down" class="text-cyberblue w-8 h-8"></i>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <style>
+        /* Matrix Background */
+        #matrix-bg {
+            background: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Cyber Card */
+        .cyber-card {
+            perspective: 1000px;
+            transition: transform 0.5s ease;
+        }
+
+        .transform-style-preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* Typing Animation */
+        .typing-text::after, .typing-subtitle::after {
+            content: "|";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Text Glow */
+        .animate-text-glow {
+            animation: text-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes text-glow {
+            from { text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+            to { text-shadow: 0 0 15px rgba(0, 255, 157, 0.8); }
+        }
+
+        /* Code Pulse */
+        .animate-code-pulse {
+            animation: code-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes code-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.15;
+            transition: all 0.5s ease-out;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #00f0ff, transparent 70%);
+            top: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #00ff9d, transparent 70%);
+            bottom: 15%;
+            right: 15%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #00f0ff, transparent 70%);
+            top: 60%;
+            left: 70%;
+            animation: float 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        /* Cyber Button */
+        .cyber-button {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .cyber-button:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.8);
+        }
+    </style>
+
+    <script>
+        // Initialize matrix background
+        function initMatrix() {
+            const container = document.getElementById('matrix-bg');
+            const chars = "01ソラナ♠♣♥♦✓✗⏣⏢⏅⍟⋒≋⍦⍧⍨⍩⍪⍫⍬⍭⍮⍯⍰⍱⍲⍳⍴⍵⍶⍷⍸⍹⍺";
+            const fontSize = 14;
+            const columns = Math.floor(window.innerWidth / fontSize);
+            const rows = Math.floor(window.innerHeight / fontSize);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column absolute top-0';
+                column.style.left = `${i * fontSize}px`;
+                column.style.width = `${fontSize}px`;
+                column.style.height = '100%';
+                
+                for (let j = 0; j < rows; j++) {
+                    const char = document.createElement('div');
+                    char.className = 'matrix-char absolute';
+                    char.style.top = `${j * fontSize}px`;
+                    char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                    char.style.color = `rgba(0, 240, 255, ${Math.random() * 0.5 + 0.1})`;
+                    char.style.opacity = '0';
+                    char.style.transition = `opacity ${Math.random() * 2 + 1}s ease-in-out`;
+                    column.appendChild(char);
+                }
+                
+                container.appendChild(column);
+                
+                // Animate column
+                animateColumn(column);
+            }
+        }
+
+        function animateColumn(column) {
+            const chars = column.querySelectorAll('.matrix-char');
+            let delay = 0;
+            
+            chars.forEach(char => {
+                setTimeout(() => {
+                    char.style.opacity = '1';
+                    setTimeout(() => {
+                        char.style.opacity = '0';
+                    }, Math.random() * 3000 + 1000);
+                }, delay);
+                
+                delay += Math.random() * 100;
+            });
+            
+            setTimeout(() => animateColumn(column), delay + 3000);
+        }
+
+        // Initialize particles
+        function initParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = Math.floor(window.innerWidth / 10);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle absolute rounded-full';
+                particle.style.width = `${Math.random() * 3 + 1}px`;
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = `rgba(0, ${Math.random() > 0.5 ? 240 : 255}, ${Math.random() > 0.5 ? 255 : 157}, ${Math.random() * 0.5 + 0.1})`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px rgba(0, 240, 255, 0.5)`;
+                
+                // Animation
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animation = `particle-move ${duration}s linear ${delay}s infinite`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particle-move {
+                0% { transform: translate(0, 0); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 + 100}px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Typing animation
+        function typeText(element) {
+            const text = element.getAttribute('data-text');
+            let i = 0;
+            element.textContent = '';
+            
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    element.querySelector('::after').style.display = 'none';
+                }
+            }, 50);
+        }
+
+        // Mouse move effects
+        function initMouseEffects() {
+            const shapes = document.querySelectorAll('.shape');
+            const cyberCard = document.querySelector('.cyber-card');
+            
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                // Move shapes slightly
+                shapes[0].style.transform = `translate(${x * 20 - 10}px, ${y * 20 - 10}px)`;
+                shapes[1].style.transform = `translate(${x * -15 + 7.5}px, ${y * -15 + 7.5}px)`;
+                shapes[2].style.transform = `translate(${x * 10 - 5}px, ${y * -10 + 5}px)`;
+                
+                // 3D card effect
+                const rotateX = (y - 0.5) * 10;
+                const rotateY = (x - 0.5) * -10;
+                cyberCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initMatrix();
+            initParticles();
+            initMouseEffects();
+            
+            // Start typing animations
+            setTimeout(() => {
+                document.querySelectorAll('.typing-text, .typing-subtitle').forEach(typeText);
+            }, 500);
+            
+            // Check for reduced motion preference
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (mediaQuery.matches) {
+                document.querySelectorAll('[class*="animate-"]').forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        });
+    </script>
+<!-- About Section -->
     <section id="about" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
