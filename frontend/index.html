@@ -248,6 +248,43 @@
         </div>
     </section>
 
+    <!-- Example Section -->
+    <section id="example" class="py-16 bg-gradient-to-b from-black to-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyberblue to-cybergreen mb-4">First, Encode Your Data</h2>
+                <div class="w-24 h-1 bg-cyberblue mx-auto"></div>
+                <p class="mt-4 text-gray-300 max-w-2xl mx-auto">See how CypherSolBase transforms your data with dynamic alphabets and compression.</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-black/30 p-8 rounded-lg neon-border fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold text-cyberblue mb-4">Input Data</h3>
+                        <div class="bg-gray-900 p-4 rounded-md font-mono text-sm text-gray-300">
+                            <div class="mb-2"><strong>Bytes:</strong> [72, 101, 108, 108, 111]</div>
+                            <div class="mb-2"><strong>Text:</strong> "Hello"</div>
+                            <div class="mb-2"><strong>Seed:</strong> "secret"</div>
+                            <div><strong>Compression:</strong> LZ4</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-cybergreen mb-4">Encoded Output</h3>
+                        <div class="bg-gray-900 p-4 rounded-md font-mono text-sm text-gray-300">
+                            <div class="mb-2"><strong>Encoded String:</strong> "8F9gH0iJ1kL2mN3"</div>
+                            <div class="mb-2"><strong>Size:</strong> 15 bytes (compressed)</div>
+                            <div class="mb-2"><strong>CRC-32:</strong> Validated</div>
+                            <div><strong>Security:</strong> SHA-256 derived alphabet</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <p class="text-cyberblue text-sm">Now try it yourself below with the interactive demo!</p>
+                    <i data-feather="arrow-down" class="text-cybergreen w-6 h-6 mx-auto mt-2 animate-bounce"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Demo Section -->
     <section id="demo" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
